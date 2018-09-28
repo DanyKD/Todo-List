@@ -1,4 +1,4 @@
-To Do List
+# To Do List
 A Java "to-do list" application it is my individual project built on 17 Sep 2018, during my attendance to a course in Software development academy. 
 It was developed for training purposes only!!!.
 
