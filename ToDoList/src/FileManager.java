@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 
 public class FileManager implements Serializable {
+	
+	
 
     public boolean write(String FilePath, Object data) {
 
