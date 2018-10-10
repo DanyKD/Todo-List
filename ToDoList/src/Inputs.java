@@ -15,7 +15,6 @@ public class Inputs {
 		 choose=inputs.nextInt();
 		
 		}catch(Exception e) {
-			//System.out.println(">> Pick an option: ");
 			inputs.next();
 		}
 		return choose;
@@ -34,10 +33,11 @@ public class Inputs {
 	}
 	
 	public int caseOne() {
+		System.out.println(">> Pick an option: ");
 		System.out.println(">> (1) Show Task List sorted by date.");
 		System.out.println(">> (2) Show Task List filtered by project.");
 		System.out.println(">> (0) Return to the main menu.");
-		System.out.print(">> Pick an option: ");
+		System.out.print(">> ");
 		return setInputsInt();
 	}
 	
@@ -46,28 +46,30 @@ public class Inputs {
 	}
 	
 	public int caseThree() {
+		System.out.println(">> Pick an option: ");
 		System.out.println(">> (1) Update Task.");
 		System.out.println(">> (2) Mark as done.");
 		System.out.println(">> (3) Remove Task.");
 		System.out.println(">> (0) Return to the main menu.");
-		System.out.print(">> Pick an option: ");
+		System.out.print(">> ");
 		return setInputsInt();
 	}
 	
 	public int caseFour() {
+		System.out.println(">> Pick an option: ");
 		System.out.println(">> (1) Save task list in file and quit.");
 		System.out.println(">> (2) Quit without saving task list in a file.");
 		System.out.println(">> (0) Return to the main menu.");
-		System.out.print(">> Pick an option: ");
+		System.out.print(">> ");
 		return setInputsInt();
 	}
 
-	public void selectCases() {
+	public void selectCases(TaskManager t) {
 	     
 		int option=startEntries();	
 		switch(option) {
 		case 1: 
-			selectCaseOne();
+			selectCaseOne(t);
 			break;
 		case 2: 
 			selectCaseTwo();
@@ -76,7 +78,7 @@ public class Inputs {
 			selectCaseThree();
 			break;
 		case 4:
-			selectCaseFour();
+			selectCaseFour(t);
 			break;
 		default:
 			System.out.println("\n Please enter a number between 1 to 4. \n");
@@ -84,15 +86,17 @@ public class Inputs {
 		}
 	}
 
-	public void selectCaseOne() {
+	public void selectCaseOne(TaskManager t) {
 		
 		int option=caseOne();
 		switch (option) {
 		case 1:
-			System.out.println("Hi Dany 1");
+			t.displayAllTasks();
 			break;
 		case 2:
-			System.out.println("Hi Dany 2");
+			System.out.print("Please enter a project you need to filter it:");
+			String project=inputs.next();
+			t.displayTasksByProject(project);
 			break;
 		case 0:
 			return;
@@ -127,13 +131,16 @@ public class Inputs {
 		}
 	}
 	
-	public void selectCaseFour() {
+	public void selectCaseFour(TaskManager t) {
 		
 		int option=caseFour();
 		switch (option) {
 		case 1:
-			System.out.println("Saving and exit...");
+			if(t.writeToFile()) {
+			System.out.println("Saving and exit...Done.");
 			inputs.close();
+			System.exit(0);
+			}
 			break;
 		case 2:
 			System.out.println("Quit without saving...Done.");
