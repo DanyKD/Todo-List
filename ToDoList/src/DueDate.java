@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 
-public class DueDate implements Serializable{
+public class DueDate implements  Serializable , Comparable<DueDate>{
 	
 	private Calendar due;
 	
@@ -51,7 +51,7 @@ public class DueDate implements Serializable{
 	
 	public boolean isDue() {
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Calendar now=Calendar.getInstance();
 		
 		now.set(Calendar.HOUR_OF_DAY,0);
@@ -66,11 +66,24 @@ public class DueDate implements Serializable{
 		
 	}
 	
+	
 	public String toString() {
 		
 		//create date format
 		 SimpleDateFormat  date = new SimpleDateFormat("dd-MM-yyyy");  
 		return date.format(due.getTime()).toString();
+	}
+
+	
+	@Override
+	public int compareTo(DueDate other) {
+		
+		if (this.getDue().getTime() == null || other.getDue().getTime() == null)
+	        
+			 return 0;
+		
+		else return this.getDue().getTime().compareTo(other.getDue().getTime());
+		
 	}
 
 }
