@@ -21,9 +21,19 @@ public class Inputs {
 		
 	}
 	
+	public String setInputsString() {
+		String str=null;
+		try {
+		 str=inputs.nextLine();
+		
+		}catch(Exception e) {
+			inputs.next();
+		}
+		return str;
+	}
 	public int startEntries() {
 		
-		System.out.println(">> Pick an option:");
+		System.out.println("\n>> Pick an option:");
 		System.out.println(">> (1) Show Task List (by date or project)");
 		System.out.println(">> (2) Add New Task");
 		System.out.println(">> (3) Edit Task (update, mark as done, remove)");
@@ -91,12 +101,16 @@ public class Inputs {
 		int option=caseOne();
 		switch (option) {
 		case 1:
+			if(t.taskCount()!=0)
 			t.displayAllTasks();
+			else System.out.println("\nThere is no tasks to display.");
 			break;
 		case 2:
-			System.out.print("Please enter a project you need to filter it:");
+			System.out.println("Please enter a project you need to filter it:");
 			String project=inputs.next();
+			if(t.taskCount()!=0)
 			t.displayTasksByProject(project);
+			else System.out.println("\nThere is no tasks to display.");
 			break;
 		case 0:
 			return;
@@ -109,6 +123,7 @@ public class Inputs {
 	public void selectCaseTwo() {
 		caseTwo();
 	}
+	
 	
 	public void selectCaseThree() {
 		
@@ -130,6 +145,7 @@ public class Inputs {
 			break;
 		}
 	}
+	
 	
 	public void selectCaseFour(TaskManager t) {
 		
