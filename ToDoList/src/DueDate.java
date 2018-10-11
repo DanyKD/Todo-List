@@ -7,16 +7,16 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 	
 	private Calendar due;
 	
+	// create constructor of due date 
+	DueDate(){}
 	
-	DueDate(){
-		setDue();
-	}
-	
+	// getter for due
 	public Calendar getDue() {
 		return this.due;
 	}
 	
-	public void setDue() {
+	// setter for due
+	public DueDate setDue(Inputs inputs) {
 	
 		boolean isNotDate=true;
 		System.out.println("Please enter due date: ");
@@ -28,13 +28,14 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 	    		 Calendar cal= Calendar.getInstance();
 	    		 cal.setLenient(false);
 	    		 // input date
-	    		 Scanner sc = new Scanner(System.in);
+	    		 //Scanner sc = new Scanner(System.in);
 	    		 System.out.print(">> day: ");
-	    		 int Day=sc.nextInt();
+	    		 int Day=inputs.setInputsInt();
 	    		 System.out.print(">> Month: ");
-	    		 int Month=sc.nextInt();
+	    		 int Month=inputs.setInputsInt();
 	    		 System.out.print(">> Year: ");
-	    		 int Year=sc.nextInt();
+	    		 int Year=inputs.setInputsInt();
+	    		 //sc.close();
 	    		 // set date
 	    		 cal.set(Year, Month-1, Day,0,0,0);
 	    		 isNotDate=false;
@@ -42,13 +43,15 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 	    		 this.due=cal;
 	    	 	} 
 	    	 catch(Exception e){
-	    		 	System.out.println("Its not a valid date! try again:");
+	    		 	System.out.println("It is not a valid date! try again:");
 	    		 	isNotDate=true;
+	    		 	
 	    	 	}
 			}
+		return this;
 	}
 	
-	
+	// check if the date is overdue
 	public boolean isDue() {
 		
 		//SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -66,7 +69,7 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 		
 	}
 	
-	
+	// Format date
 	public String toString() {
 		
 		//create date format
@@ -74,7 +77,7 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 		return date.format(due.getTime()).toString();
 	}
 
-	
+	// compare two due date
 	@Override
 	public int compareTo(DueDate other) {
 		

@@ -1,13 +1,9 @@
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,7 +11,7 @@ import java.util.logging.Logger;
 public class FileManager implements Serializable {
 	
 	
-
+	// writing in a file
     public boolean write(String FilePath, Object data) {
 
         try {
@@ -36,6 +32,7 @@ public class FileManager implements Serializable {
         return false;
     }
 
+    // Reading from a file
     public Object read(String FilePath) {
 
         Object Result = null;
@@ -43,7 +40,8 @@ public class FileManager implements Serializable {
         try {
             System.out.println("Reading ! From " + FilePath);
 
-            ObjectInputStream Reader = new ObjectInputStream(new FileInputStream(FilePath));
+            @SuppressWarnings("resource")
+			ObjectInputStream Reader = new ObjectInputStream(new FileInputStream(FilePath));
 
             Result = Reader.readObject();
 

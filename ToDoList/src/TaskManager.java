@@ -12,15 +12,16 @@ public class TaskManager implements Serializable{
 	private final String toDoFileName = "ToDoList.bin";
 	FileManager FManger = new FileManager();
 	
-	
- public void isFileAvailable() {
+  // Check if a file is exist
+  public void isFileAvailable() {
 		String projectPath=System.getProperty("user.dir");
 		//System.out.println("Project Path: " + projectPath);
 		File currentDir= new File(projectPath);
 		checkFileInDirectory(currentDir);
 	}
 	
- public static void checkFileInDirectory(File dir) {
+  // Check the directory of project if the file is exist
+  public static void checkFileInDirectory(File dir) {
 		File[] files=dir.listFiles();
 		boolean toDoListFile=true;
 		for(File file:files) {
@@ -36,8 +37,9 @@ public class TaskManager implements Serializable{
 			Tmanager.loadFromFile();
 		}
 	}
-	
- public  void addTask(Task task){
+
+  // Add task to the list
+  public  void addTask(Task task){
 			
 		 ArrayList<Task> taskList = toDoList.get(task.getProject());
 		 
@@ -53,7 +55,8 @@ public class TaskManager implements Serializable{
 		    
 	}
 	
- public boolean isProjectAvailable(String project) {
+  // Check if the project is already exist in the list
+  public boolean isProjectAvailable(String project) {
 		try {
 			if(toDoList.containsKey(project.toUpperCase()))
 			 return true;
@@ -65,7 +68,8 @@ public class TaskManager implements Serializable{
 		
 	}
 	
- public String assignProject(String project) {
+  // add project to the list if the project not in the list
+  public String assignProject(String project) {
 		if(isProjectAvailable(project)){
 			return project.toUpperCase();
 		} else {
@@ -74,22 +78,26 @@ public class TaskManager implements Serializable{
 		} 
 	}
 	
- public boolean writeToFile() {
+  // Write list to the file
+  public boolean writeToFile() {
         return FManger.write(toDoFileName, toDoList);
     }
 	
- public void loadFromFile() {
+  // load list from the file
+  public void loadFromFile() {
         toDoList= (HashMap<String,ArrayList<Task>>)FManger.read(toDoFileName);
     }
  
- public String toString() {
+  // Format list to print
+  public String toString() {
 		if(toDoList==null)
 			return "there is no task to do.";
 		else 
 			return toDoList.toString();
 	}
 	
- public ArrayList<Task> allTasks() {
+  // put all tasks in array list 
+  public ArrayList<Task> allTasks() {
 		return toDoList.values()
 					   .stream()
 					   .flatMap(Collection::stream)
@@ -97,7 +105,8 @@ public class TaskManager implements Serializable{
 								      
 	}
 	
- public void displayAllTasks() {
+  // Sort all tasks by date
+  public void displayAllTasks() {
 	   
 	 allTasks().stream()	  
 	              .sorted(Task::compareTask)
@@ -106,7 +115,8 @@ public class TaskManager implements Serializable{
 				  });
 	}
 
-public void displayTasksByProject(String project) {
+  // Display all Tasks of certain project
+  public void displayTasksByProject(String project) {
 		
 	if(isProjectAvailable(project)) {
 	
@@ -122,11 +132,13 @@ public void displayTasksByProject(String project) {
 	else System.out.println("The project "+project+" does not exist.");
 	}
 
- public int getTaskId() {
+  // Create task id by added one to the count of list
+  public int getTaskId() {
 	 return allTasks().size()+1;
  }
  
- public int taskCountBystatus(String status) {
+  // Count of tasks by certain status
+  public int taskCountBystatus(String status) {
 		
 		return (int)allTasks().stream()
 				         .filter(s->s.getStatus().equals(status))
@@ -134,15 +146,18 @@ public void displayTasksByProject(String project) {
 				         .count();
 	}
 	
- public int tasksToDoCount() {
+  // Count of tasks of status to do
+  public int tasksToDoCount() {
 		return taskCountBystatus("To Do");
 	}
 	
- public int tasksAreDoneCount() {
+//Count of tasks of status Done
+  public int tasksAreDoneCount() {
 		return taskCountBystatus("Done");
 	}
 	
- public void start() {
+  // Welcome message 
+  public void start() {
 		
 	 System.out.println("***********************************************");
 	 System.out.println(">> Welcome toDoly");
@@ -150,7 +165,8 @@ public void displayTasksByProject(String project) {
 
 	}
 
- public ArrayList<Task> setTasksId(){
+  // add id to list of tasks
+  public ArrayList<Task> setTasksId(){
 	  ArrayList<Task> updateIdList=allTasks();
 	  Iterator<Task> it=updateIdList.iterator();
 	  int countId=1;
@@ -163,7 +179,8 @@ public void displayTasksByProject(String project) {
 	  
  }
 
- public Task getTask(int id) {
+  // Search about certain task
+  public Task getTask(int id) {
 	 
 	 try{return toDoList.values()
 	 		 .stream()
@@ -176,7 +193,8 @@ public void displayTasksByProject(String project) {
 	 }
  }
 
- public void removeTask(int id) {
+  // Remove task from the list
+  public void removeTask(int id) {
     Task task=getTask(id);
     try{
     	if(toDoList.get(task.getProject()).removeIf(e->e.equals(task)))
@@ -187,25 +205,28 @@ public void displayTasksByProject(String project) {
     }
  }
 
- public int tasksCount() {
+  // Count of tasks
+  public int tasksCount() {
 	return (int)toDoList.values().stream().flatMap(Collection::stream).count();
 }
 
- public void displayProject() {
+  // Display projects in the list
+  public void displayProject() {
 	
 	 if(toDoList.size()!=0) {
-	 toDoList.entrySet()
-			 	     .stream()
-			 	     .map(e->e.getKey())
-			 	     .forEach(e-> {
-			 	    	 System.out.println("*  "+ e.toString());
-			 	    	 
+		 System.out.println("Available projects are: ");
+		 toDoList.entrySet()
+			 	 .stream()
+			 	 .map(e->e.getKey())
+			 	 .forEach(e-> {
+			 	     System.out.println("*  "+ e.toString());	 
 			 	     });}
 	 else System.out.println("There is no avaliable project.");
 			 //.collect(Collectors.toCollection(ArrayList::new)); 
   }
 
- public Task createTaskWithProject(Task task,String project){
+  // Add project to the task
+  public Task createTaskWithProject(Task task,String project){
 	 
 	 task.createTaskWithoutProject(tasksCount()+1);
 	 project=assignProject(project);
@@ -215,5 +236,18 @@ public void displayTasksByProject(String project) {
 	 return task;
  }
  
+  // Mark task as done
+  public void markTaskAsDone(int id) {
+ try{
+	 	Task task=getTask(id);
+	 	if(task.getStatus().equals("To Do")) {
+	 		task.markAsDone();
+	 		System.out.println("Task number: "+id+" is mark as done.");
+	 	}
+	 	else System.out.println("Task number: "+id+" is already Done.");
+    }catch(Exception e) {
+ 	   	System.out.println("Task number:"+id+" not found");
+ }
+ }
 }
 
