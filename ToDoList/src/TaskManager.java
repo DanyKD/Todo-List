@@ -2,22 +2,20 @@ import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
 public class TaskManager implements Serializable{
-	private int taskCount;
+	//private int taskCount;
 	private static HashMap<String,ArrayList<Task>> toDoList=new HashMap<>();
 	private final String toDoFileName = "ToDoList.bin";
 	FileManager FManger = new FileManager();
 	
+	
  public void isFileAvailable() {
 		String projectPath=System.getProperty("user.dir");
-		System.out.println("Project Path: " + projectPath);
+		//System.out.println("Project Path: " + projectPath);
 		File currentDir= new File(projectPath);
 		checkFileInDirectory(currentDir);
 	}
@@ -128,28 +126,29 @@ public void displayTasksByProject(String project) {
 	 return allTasks().size()+1;
  }
  
- public int taskCountBystatus(Boolean status) {
+ public int taskCountBystatus(String status) {
 		
 		return (int)allTasks().stream()
-				         .filter(s->s.getStatus()==status)
+				         .filter(s->s.getStatus().equals(status))
 				         .map(s->s.getStatus())
 				         .count();
 	}
 	
  public int tasksToDoCount() {
-		return taskCountBystatus(false);
+		return taskCountBystatus("To Do");
 	}
 	
  public int tasksAreDoneCount() {
-		return taskCountBystatus(true);
+		return taskCountBystatus("Done");
 	}
 	
  public void start() {
-		System.out.println(">> Welcome toDoly");
-		System.out.println(">> You have "+tasksToDoCount()+" tasks todo and "+tasksAreDoneCount()+" tasks are done!");
+		
+	 System.out.println("***********************************************");
+	 System.out.println(">> Welcome toDoly");
+	 System.out.println(">> You have "+tasksToDoCount()+" tasks todo and "+tasksAreDoneCount()+" tasks are done!");
 
 	}
-
 
  public ArrayList<Task> setTasksId(){
 	  ArrayList<Task> updateIdList=allTasks();
@@ -177,7 +176,7 @@ public void displayTasksByProject(String project) {
 	 }
  }
 
-public void removeTask(int id) {
+ public void removeTask(int id) {
     Task task=getTask(id);
     try{
     	if(toDoList.get(task.getProject()).removeIf(e->e.equals(task)))
@@ -187,5 +186,34 @@ public void removeTask(int id) {
     	System.out.println("Task number:"+id+" not found");
     }
  }
+
+ public int tasksCount() {
+	return (int)toDoList.values().stream().flatMap(Collection::stream).count();
+}
+
+ public void displayProject() {
+	
+	 if(toDoList.size()!=0) {
+	 toDoList.entrySet()
+			 	     .stream()
+			 	     .map(e->e.getKey())
+			 	     .forEach(e-> {
+			 	    	 System.out.println("*  "+ e.toString());
+			 	    	 
+			 	     });}
+	 else System.out.println("There is no avaliable project.");
+			 //.collect(Collectors.toCollection(ArrayList::new)); 
+  }
+
+ public Task createTaskWithProject(Task task,String project){
+	 
+	 task.createTaskWithoutProject(tasksCount()+1);
+	 project=assignProject(project);
+	 if(project!=null)
+		 task.setProject(project);
+	 else System.out.println("There is no entries to add.");
+	 return task;
+ }
+ 
 }
 

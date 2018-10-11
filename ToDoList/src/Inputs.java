@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class Inputs {
+public class Inputs implements Serializable{
 	
-	private Scanner inputs;
+	private static Scanner inputs;
 	
 	Inputs(){
 		inputs=new Scanner(System.in);
@@ -56,9 +57,9 @@ public class Inputs {
 		return setInputsInt();
 	}
 	
-	public void caseTwo() {
+	/*public void caseTwo() {
 		
-	}
+	}*/
 	
 	public int caseThree() {
 		System.out.println(">> Pick an option: ");
@@ -87,10 +88,10 @@ public class Inputs {
 			selectCaseOne(t);
 			break;
 		case 2: 
-			selectCaseTwo();
+			selectCaseTwo(t);
 			break;
 		case 3: 
-			selectCaseThree();
+			selectCaseThree(t);
 			break;
 		case 4:
 			selectCaseFour(t);
@@ -106,14 +107,14 @@ public class Inputs {
 		int option=caseOne();
 		switch (option) {
 		case 1:
-			if(t.taskCount()!=0)
+			if(t.tasksCount()!=0)
 			t.displayAllTasks();
 			else System.out.println("\nThere is no tasks to display.\n");
 			break;
 		case 2:
 			System.out.println("Please enter a project you need to filter it:");
 			String project=inputs.next();
-			if(t.taskCount()!=0)
+			if(t.tasksCount()!=0)
 			t.displayTasksByProject(project);
 			else System.out.println("\nThere is no tasks to display.\n");
 			break;
@@ -125,12 +126,19 @@ public class Inputs {
 		}
 	}
 	
-	public void selectCaseTwo() {
-		caseTwo();
+	public void selectCaseTwo(TaskManager t) {
+		//caseTwo();
+		Task task=new Task();
+		System.out.println("available projects are: ");
+		t.displayProject();
+		System.out.println("Please enter project:");
+		String project=setInputsString();
+		t.createTaskWithProject(task, project);
+		t.addTask(task);
+		System.out.println(t.allTasks().toString());
 	}
 	
-	
-	public void selectCaseThree() {
+	public void selectCaseThree(TaskManager t) {
 		
 		int option=caseThree();
 		switch(option) {
@@ -150,7 +158,6 @@ public class Inputs {
 			break;
 		}
 	}
-	
 	
 	public void selectCaseFour(TaskManager t) {
 		
