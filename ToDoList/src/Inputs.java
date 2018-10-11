@@ -31,13 +31,18 @@ public class Inputs {
 		}
 		return str;
 	}
+	
 	public int startEntries() {
 		
-		System.out.println("\n>> Pick an option:");
+		System.out.println("***********************************************");
+		System.out.println("***********************************************");
+		System.out.println(">> Pick an option:");
 		System.out.println(">> (1) Show Task List (by date or project)");
 		System.out.println(">> (2) Add New Task");
 		System.out.println(">> (3) Edit Task (update, mark as done, remove)");
 		System.out.println(">> (4) Save and Quit");
+		System.out.println("***********************************************");
+		System.out.println("***********************************************");
 		System.out.print(">> ");
 		return setInputsInt();
 	}
@@ -103,14 +108,14 @@ public class Inputs {
 		case 1:
 			if(t.taskCount()!=0)
 			t.displayAllTasks();
-			else System.out.println("\nThere is no tasks to display.");
+			else System.out.println("\nThere is no tasks to display.\n");
 			break;
 		case 2:
 			System.out.println("Please enter a project you need to filter it:");
 			String project=inputs.next();
 			if(t.taskCount()!=0)
 			t.displayTasksByProject(project);
-			else System.out.println("\nThere is no tasks to display.");
+			else System.out.println("\nThere is no tasks to display.\n");
 			break;
 		case 0:
 			return;
