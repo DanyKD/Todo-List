@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.2" icons="false" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+<class-diagram version="1.2.2" icons="true" always-add-relationships="true" generalizations="true" realizations="true" 
+  associations="true" dependencies="true" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="Task" project="ToDoList" file="/ToDoList/src/Task.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="38" width="78" x="722" y="232"/>    
+    <position height="38" width="78" x="460" y="45"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="Main" project="ToDoList" file="/ToDoList/src/Main.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="46" width="74" x="41" y="37"/>    
+    <position height="46" width="74" x="233" y="352"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="TaskManager" project="ToDoList" file="/ToDoList/src/TaskManager.java" 
     binary="false" corner="TOP_LEFT">    
-    <position height="59" width="154" x="482" y="35"/>    
+    <position height="59" width="154" x="417" y="203"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="FileManager" project="ToDoList" file="/ToDoList/src/FileManager.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="64" width="106" x="735" y="34"/>    
+    <position height="64" width="106" x="744" y="200"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="DueDate" project="ToDoList" file="/ToDoList/src/DueDate.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="36" width="81" x="535" y="363"/>    
+    <position height="36" width="81" x="98" y="45"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="false" package="false" protected="false" private="false" static="false"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="Inputs" project="ToDoList" file="/ToDoList/src/Inputs.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="49" width="69" x="362" y="227"/>    
+    <position height="49" width="69" x="31" y="207"/>    
     <display autosize="false" stereotype="false" package="false" initial-value="false" signature="false" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="false" package="false" protected="false" private="false" static="true"/>      
@@ -56,50 +56,71 @@
     </display>  
   </class>  
   <dependency id="7">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </dependency>  
-  <dependency id="8">    
-    <end type="SOURCE" refId="6"/>    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </dependency>  
-  <dependency id="9">    
-    <bendpoint x="400" y="382"/>    
-    <end type="SOURCE" refId="5"/>    
+  <dependency id="8">    
+    <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="6"/>  
   </dependency>  
-  <association id="10">    
+  <association id="9">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="11" name="dueDate"/>      
-      <multiplicity id="12" minimum="0" maximum="1"/>    
+      <attribute id="10" name="dueDate">        
+        <position height="0" width="0" x="-437" y="-318"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-437" y="-318"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="13">    
+  <dependency id="12">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="13">    
+    <bendpoint x="68" y="65"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="14">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="15">    
+    <bendpoint x="249" y="101"/>    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="14" name="inputs"/>      
-      <multiplicity id="15" minimum="0" maximum="1"/>    
+      <attribute id="16" name="inputs">        
+        <position height="0" width="0" x="-331" y="-20"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-331" y="-20"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="16">    
+  <association id="18">    
     <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="17" name="FManger">        
-        <position height="0" width="0" x="437" y="-801"/>      
+      <attribute id="19" name="FManger">        
+        <position height="0" width="0" x="446" y="-635"/>      
       </attribute>      
-      <multiplicity id="18" minimum="0" maximum="1">        
-        <position height="0" width="0" x="437" y="-801"/>      
+      <multiplicity id="20" minimum="0" maximum="1">        
+        <position height="0" width="0" x="446" y="-635"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+  <dependency id="21">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
-    <operations public="false" package="false" protected="false" private="false" static="true"/>  
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
   </classifier-display>  
   <association-display labels="true" multiplicity="true"/>
 </class-diagram>

@@ -1,3 +1,4 @@
+
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -164,7 +165,7 @@ public class Inputs implements Serializable{
 		case 1:
 			// Ask User to input task id
 			int taskId=askForTaskId("update",t);
-			System.out.println("Hi Dany 1");
+			System.out.println("Under construction");
 			break;
 		case 2:
 			// Ask User to input task id
@@ -222,7 +223,7 @@ public class Inputs implements Serializable{
 	// User entry for task id
 	public int askForTaskId(String function,TaskManager t) {
 		t.displayAllTasks();
-		System.out.print("Please enter you want to "+function+" >>");
+		System.out.print("Please enter task number you want to "+function+" >>");
 		return setInputsInt();
 		
 	}

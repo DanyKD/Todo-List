@@ -1,3 +1,5 @@
+
+ 
 import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -111,7 +113,7 @@ public class TaskManager implements Serializable{
 	 allTasks().stream()	  
 	              .sorted(Task::compareTask)
 				  .forEach(e->{
-					  System.out.println("Task: "+e.toString()+"\n");
+					  System.out.println("TaskId: "+e.toString()+"\n");
 				  });
 	}
 
@@ -126,7 +128,7 @@ public class TaskManager implements Serializable{
 					.map(s->s.getValue())
 					.flatMap(s->s.stream())
 					.forEach(e -> {
-						System.out.format("value: %s \n", e.toString());
+						System.out.format("Task: %s \n", e.toString());
 					});
 			}
 	else System.out.println("The project "+project+" does not exist.");

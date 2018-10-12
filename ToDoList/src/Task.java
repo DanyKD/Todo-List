@@ -1,3 +1,6 @@
+
+
+
 import java.io.Serializable;
 
 public class Task implements Serializable{
@@ -77,7 +80,7 @@ public class Task implements Serializable{
 	// Format Task to print
 	public String toString() {
 		
-		return id +" Task Title is: "+title+" Project is: "+ project+" Due date of the Task is: "+dueDate.toString()+" Status of the task is: "+status;
+		return id +", Title: "+title+", Project: "+ project+", Due date: "+dueDate.toString()+", Status: "+status;
 	}
 	
 	// Compare two tasks
