@@ -1,17 +1,20 @@
 
 
 
+
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 //import java.util.Scanner;
+
+
 
 public class DueDate implements  Serializable , Comparable<DueDate>{
 	
 	private Calendar due;
 	
 	// create constructor of due date 
-	DueDate(){}
+	public DueDate(){}
 	
 	// getter for due
 	public Calendar getDue() {

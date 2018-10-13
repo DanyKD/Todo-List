@@ -13,7 +13,7 @@ public class Task implements Serializable{
 	private Inputs inputs;
 	
 	// create constructor of Task
-	Task(){
+	public Task(){
 		dueDate=new DueDate();
 		inputs=new Inputs();
 	};
@@ -89,7 +89,7 @@ public class Task implements Serializable{
 		return this.getDueDate().compareTo(other.getDueDate());
 	}
 
-	
+	// Entries
 	public String enterString() {
 		String str=inputs.setInputsString();
 		return str;
@@ -108,6 +108,17 @@ public class Task implements Serializable{
 		this.setTitle(title);
 	} 
 	
+	// Add Project to a task
+	public void addProject() {
+			System.out.print("Pleaee enter a project of the task >>");
+			String project=enterString().trim();
+			this.setProject(project);
+		} 
+		
+	// Add DueDate to a task
+	public void addDueDate() {
+		this.setDueDate(dueDate);
+	}
 	
 	// Create new task without add project
 	public Task createTaskWithoutProject(int id) {
@@ -116,4 +127,5 @@ public class Task implements Serializable{
 		setId(id);
 		return this;
 	}
+
 }

@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class Inputs implements Serializable{
 	
-	private static Scanner inputs;
+	//private static Scanner inputs;
 	
 	// create constructor of inputs 
-	Inputs(){
-		inputs=new Scanner(System.in);
+	public Inputs(){
+		
 	}
 	
 	// User input of integer
 	public int setInputsInt() {
-		
-		int choose=15;
+		Scanner inputs=new Scanner(System.in);
+		int choose=0;
 		try {
 		 choose=inputs.nextInt();
 		
@@ -22,11 +22,11 @@ public class Inputs implements Serializable{
 			inputs.next();
 		}
 		return choose;
-		
 	}
 	
 	// User input of String
 	public String setInputsString() {
+		Scanner inputs=new Scanner(System.in);
 		String str=null;
 		try {
 		 str=inputs.nextLine();
@@ -63,9 +63,15 @@ public class Inputs implements Serializable{
 		return setInputsInt();
 	}
 	
-	/*public void caseTwo() {
-		
-	}*/
+	public int casesOfUpdateTask() {
+		System.out.println(">> Pick an option: ");
+		System.out.println(">> (1) Update Task title.");
+		System.out.println(">> (2) Update Task due date.");
+		System.out.println(">> (3) Update Task project.");
+		System.out.println(">> (0) Return to the back menu.");
+		System.out.print(">> ");
+		return setInputsInt();
+	}
 	
 	// show sub menu of Edit Task
 	public int caseThree() {
@@ -126,7 +132,7 @@ public class Inputs implements Serializable{
 		case 2:
 			// Display all Tasks filtered by project
 			System.out.print("Please enter a project you need to filter it >>");
-			String project=inputs.next();
+			String project=setInputsString();
 			if(t.tasksCount()!=0)
 			t.displayTasksByProject(project);
 			else System.out.println("\nThere is no tasks to display.\n");
@@ -163,13 +169,11 @@ public class Inputs implements Serializable{
 		int option=caseThree();
 		switch(option) {
 		case 1:
-			// Ask User to input task id
-			int taskId=askForTaskId("update",t);
-			System.out.println("Under construction");
+			selectCasesOfUpdateTask(t);
 			break;
 		case 2:
 			// Ask User to input task id
-			taskId=askForTaskId("mark as done",t);
+			int taskId=askForTaskId("mark as done",t);
 			// Mark task as done
 			t.markTaskAsDone(taskId);
 			break;
@@ -199,14 +203,14 @@ public class Inputs implements Serializable{
 			// Saving data to a file and exit 
 			if(t.writeToFile()) {
 			System.out.println("Saving and exit...Done.");
-			inputs.close();
+			//inputs.close();
 			System.exit(0);
 			}
 			break;
 		case 2:
 			// exit without saving
 			System.out.println("Quit without saving...Done.");
-			inputs.close();
+			//inputs.close();
 			System.exit(0);
 			break;
 		case 0:
@@ -227,4 +231,30 @@ public class Inputs implements Serializable{
 		return setInputsInt();
 		
 	}
+
+	// Update task 
+	public void selectCasesOfUpdateTask(TaskManager t) {
+		int option=casesOfUpdateTask();
+		// Ask User to input task id
+		switch(option) {
+		case 1:
+			int taskId=askForTaskId("update title",t);
+			t.updateTaskTitle(taskId);
+			break;
+		case 2:
+			taskId=askForTaskId("update due date",t);
+			t.updateTaskDueDate(taskId);
+			break;
+		case 3:
+			taskId=askForTaskId("update project",t);
+			t.updateTaskProject(taskId);
+			break;
+		case 0: 
+			return;
+		default:
+			System.out.println("Task could not updated");
+			break;
+		}
+	}
+
 }

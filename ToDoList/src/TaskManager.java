@@ -128,7 +128,7 @@ public class TaskManager implements Serializable{
 					.map(s->s.getValue())
 					.flatMap(s->s.stream())
 					.forEach(e -> {
-						System.out.format("Task: %s \n", e.toString());
+						System.out.format("TaskId: %s \n", e.toString());
 					});
 			}
 	else System.out.println("The project "+project+" does not exist.");
@@ -251,5 +251,45 @@ public class TaskManager implements Serializable{
  	   	System.out.println("Task number:"+id+" not found");
  }
  }
+
+  // Update title in certain task
+  public void updateTaskTitle(int id) {
+	  try {
+	  getTask(id).addTitle();
+	  System.out.println("Task "+id+" is successfully updated.");
+	  }catch(Exception e){
+		  System.out.println("Task "+id+" counld not updated.");
+	  }
+  }
+	 
+  // Update due date in certain task
+  public void updateTaskDueDate(int id) {
+	  try {
+	  getTask(id).addDueDate();
+	  System.out.println("Task "+id+" is successfully updated.");
+	  }catch(Exception e){
+		  System.out.println("Task "+id+" counld not updated.");
+	  }
+  }
+  
+  // Update Project in certain task
+  public void updateTaskProject(int id) {
+	  try {
+	  Task task=getTask(id);
+	  removeTask(id);
+	  task.addProject();
+	  assignProject(task.getProject());
+	  addTask(task);
+	  System.out.println("Task is updated.");
+	  removeAllNullProjects();
+	  }catch(Exception e) {
+		  System.out.println("Task could not updated.");  
+	  }
+  }
+
+  // Remove project with null tasks
+  public void removeAllNullProjects() {
+	toDoList.entrySet().removeIf(e->e.getValue().size()==0);
+	}
 }
 
