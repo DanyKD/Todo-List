@@ -159,7 +159,11 @@ public class Inputs implements Serializable{
 		t.createTaskWithProject(task, project);
 		// Added task to task manager
 		t.addTask(task);
-		System.out.println(t.allTasks().toString());
+		t.allTasks().stream().forEach(e -> {
+			System.out.format("TaskId: %s \n", e.toString());
+		});
+		
+		//System.out.println(t.allTasks().toString());
 	}
 	
 	
