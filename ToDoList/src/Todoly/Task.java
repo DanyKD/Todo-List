@@ -1,7 +1,10 @@
+package Todoly;
 
 
 
 import java.io.Serializable;
+
+import Date.DueDate;
 
 public class Task implements Serializable{
 	
