@@ -2,32 +2,35 @@ package Todoly;
 
 import java.io.Serializable;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Inputs implements Serializable{
 	
 	//private static Scanner inputs;
+	Scanner inputs;
 	
 	// create constructor of inputs 
 	public Inputs(){
-		
+		inputs=new Scanner(System.in);
 	}
 	
 	// User input of integer
 	public int setInputsInt() {
-		Scanner inputs=new Scanner(System.in);
+		
+		
 		int choose=0;
 		try {
-		 choose=inputs.nextInt();
-		
-		}catch(Exception e) {
-			inputs.next();
+			choose=Integer.parseInt(inputs.nextLine());
+		} catch (Exception e) {
+			
 		}
+		
 		return choose;
 	}
 	
 	// User input of String
 	public String setInputsString() {
-		Scanner inputs=new Scanner(System.in);
+		//Scanner inputs=new Scanner(System.in);
 		String str=null;
 		try {
 		 str=inputs.nextLine();
