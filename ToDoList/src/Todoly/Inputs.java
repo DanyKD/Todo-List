@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 public class Inputs implements Serializable{
 	
 	//private static Scanner inputs;
-	Scanner inputs;
+	static Scanner inputs;
 	
 	// create constructor of inputs 
 	public Inputs(){
