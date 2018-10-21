@@ -17,8 +17,9 @@ public class DueDate implements  Serializable , Comparable<DueDate>{
 	private Calendar due;
 	
 	// create constructor of due date 
-	public DueDate(){}
-	
+	public DueDate(){
+	due=Calendar.getInstance();
+	}
 	// getter for due
 	public Calendar getDue() {
 		return this.due;

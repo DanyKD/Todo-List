@@ -43,14 +43,22 @@ class DueDateTest {
 		System.setIn(originalIn);
 	}
 
-	@Test
-	void testDueDate() {
-		
-	}
 
 	@Test
 	void testGetDue() {
 		
+		Calendar cal=Calendar.getInstance();
+		cal.set(2010, 9, 13,0,0,0);
+		String inputs = "13\n" +
+		        "10\n" +
+		        "2010\n";
+		ba = new ByteArrayInputStream(inputs.getBytes());
+		System.setIn(ba);
+		Inputs in1 = new Inputs();
+		DueDate dd = date1.setDue(in1);
+		assertEquals(cal.get(Calendar.DAY_OF_MONTH),dd.getDue().get(Calendar.DAY_OF_MONTH));
+		assertEquals(cal.get(Calendar.MONTH),dd.getDue().get(Calendar.MONTH));
+		assertEquals(cal.get(Calendar.YEAR),dd.getDue().get(Calendar.YEAR));
 	}
 
 	@Test
@@ -96,13 +104,53 @@ class DueDateTest {
 	}
 
 	@Test
-	void testToString() {
+	void testCorrectToString() {
+		String d="10-12-2015";
+		String inputs = "10\n" +
+		        "12\n" +
+		        "2015\n";
+		ba = new ByteArrayInputStream(inputs.getBytes());
+		System.setIn(ba);
+		Inputs in1 = new Inputs();
+		DueDate dd = date1.setDue(in1);
+		assertEquals(d, dd.toString());
+	}
+	
+	@Test
+	void testCorrectCompareTo() {
 		
+		DueDate date2=new DueDate();
+		
+		assertEquals(0,date1.compareTo(date2));
+	}
+	@Test
+	void testCompareToBigger() {
+		
+		DueDate date2=new DueDate();
+		String inputs = "10\n" +
+		        "12\n" +
+		        "2018\n";
+		ba = new ByteArrayInputStream(inputs.getBytes());
+		System.setIn(ba);
+		Inputs in1 = new Inputs();
+		DueDate dd = date1.setDue(in1);
+		
+		assertEquals(1,date1.compareTo(date2));
 	}
 
 	@Test
-	void testCompareTo() {
+	void testCompareToSmaller() {
 		
+		DueDate date2=new DueDate();
+		String inputs = "10\n" +
+		        "10\n" +
+		        "2010\n";
+		ba = new ByteArrayInputStream(inputs.getBytes());
+		System.setIn(ba);
+		Inputs in1 = new Inputs();
+		DueDate dd = date1.setDue(in1);
+		
+		assertEquals(-1,date1.compareTo(date2));
 	}
 
 }
